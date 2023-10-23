@@ -1,10 +1,15 @@
-const client = require('../db/index');
+const client = require("../db/index");
 
 const createTask = async (req, res) => {
   const { task, completed } = req.body;
 
   if (!task || !task.trim()) {
     res.status(400).json({ error: "task is required." });
+    return;
+  }
+
+  if (typeof completed !== "boolean") {
+    res.status(400).json({ error: "completed is required." });
     return;
   }
 
@@ -35,6 +40,11 @@ const updateTask = async (req, res) => {
 
   if (!task || !task.trim()) {
     res.status(400).json({ error: "task is required." });
+    return;
+  }
+
+  if (typeof completed !== "boolean") {
+    res.status(400).json({ error: "completed is required." });
     return;
   }
 
